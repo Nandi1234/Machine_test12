@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\AdminTrait;
+// use App\Traits\AdminTrait;
 class Exam extends Model
 {
-    use AdminTrait;
+    // use AdminTrait;
     protected $fillable = ['user_id',
     'date',
     'marks'];

@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Exam;
 use App\ExamQuestion;
+use App\Http\Controllers\Controller;
 use App\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class ExamController extends Controller
+class QuestionController extends Controller
 {
-    public function createExam()
+    public function index()
     {
+
         $ques = Question::all();
-        if(count($ques) < 5){
-            return redirect()->back()->withErrors('Minimun Question Should Be More Than 5');
-        }
+        
         $questions  = Question::inRandomOrder()->limit(5)->get();
         // dd($question);
         $exam = Exam::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => 2,
             'date' => date('Y-m-d'),
         ]);
         foreach ($questions as $question) {
@@ -27,13 +28,21 @@ class ExamController extends Controller
                 'question_id' => $question->id
             ]);
         }
-
-        return view('exam.create', compact('questions', 'exam'));
+        return response()->json([
+            'data' => ['questions' => $questions, 'exam' => $exam]
+        ]);
     }
 
     public function saveExam(Request $request, $exam)
     {
-        dd($request);
+
+        $validator = Validator::make($request->all(), [
+            'question_ids' => 'required|array|min:5|max:5',
+           
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['msg' => 'You have a validation error', 'data' => $validator->errors(), 'error' => true], 400);
+        }
         $exams = Exam::findOrFail($exam);
         foreach ($request->question_ids as $question) {
             $examQuestion = ExamQuestion::where('exam_id', $exam)
@@ -57,17 +66,10 @@ class ExamController extends Controller
         $exams->marks = $marks;
         $exams->save();
         // dd($exams);
-        return redirect()->route('indexexam');
-    }
-
-    public function indexExam()
-    {
-       $exams = Exam::with('user')->get();
-       return view('exam.index',compact('exams'));
-    }
-    public function showExam($id)
-    {
-        $exam = Exam::findOrFail($id);
-        return view('exam.show',compact('exam'));
+        $exam = Exam::findOrFail($exam);
+        return response()->json([
+            'data'=> ['exam'=>$exam],
+            'code' => 200
+        ]);
     }
 }
