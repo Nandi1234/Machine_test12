@@ -72,4 +72,53 @@ class QuestionController extends Controller
             'code' => 200
         ]);
     }
+
+    public function questionStore(Request $request)
+    {
+        // dd($request);
+        $validated = $request->validate([
+            'question' => 'required',
+            'option1' => 'required',
+            'option2' => 'required',
+            'option3' => 'required',
+            'option4' => 'required',
+            'answer' => 'required',
+        ]);
+        $question = Question::create(request()->all());
+        $questions = Question::all();
+        return response()->json([
+            'data'=> ['questions'=>$questions],
+            'code' => 200
+        ]);
+        
+   
+    }
+
+    public function allQuestions()
+    {
+        $questions = Question::all();
+        return response()->json([
+            'data'=> ['questions'=>$questions],
+            'code' => 200
+        ]);  
+    }
+
+    public function updateQuestion(Request $request,$id)
+    {
+        $validated = $request->validate([
+            'question' => 'required',
+            'option1' => 'required',
+            'option2' => 'required',
+            'option3' => 'required',
+            'option4' => 'required',
+            'answer' => 'required',
+        ]);
+        $question = Question::findOrFail($id);
+        $question = $question->update(request()->all()); 
+        $questions = Question::all();
+        return response()->json([
+            'data'=> ['questions'=>$questions],
+            'code' => 200
+        ]);
+    }
 }

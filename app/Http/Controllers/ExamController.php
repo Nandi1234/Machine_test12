@@ -33,7 +33,7 @@ class ExamController extends Controller
 
     public function saveExam(Request $request, $exam)
     {
-        dd($request);
+        
         $exams = Exam::findOrFail($exam);
         foreach ($request->question_ids as $question) {
             $examQuestion = ExamQuestion::where('exam_id', $exam)

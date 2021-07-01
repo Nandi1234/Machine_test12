@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "428eb3f3-15b2-40a0-9134-bc5b5fcbc0fb",
+		"name": "Exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Exam",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question_ids\":[6,7,1,2,3],\r\n    \"6\":1,\r\n    \"7\":3,\r\n    \"1\":4,\r\n    \"2\":2,\r\n    \"3\":4\r\n    }"
+				},
+				"url": "http://127.0.0.1:8000/api/exam-save/9"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/questions"
+			},
+			"response": []
+		},
+		{
+			"name": "Save Question",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\" :\"Which of the following term originates from the Greek language that means “having multiple forms,” defines OOP’s ability to redefine, a class’s characteristics?\",\r\n    \"option1\":\"Abstraction\",\r\n    \"option2\":\"Polymorphism\",\r\n    \"option3\":\"Inheritance\",\r\n    \"option4\":\"Differential\",\r\n    \"answer\":2\r\n}"
+				},
+				"url": "http://127.0.0.1:8000/api/questions-save"
+			},
+			"response": []
+		},
+		{
+			"name": "Question Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/all-questions"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Question",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\" :\"Which of the following term originates from the Greek language that means “having multiple forms,” defines OOP’s ability to redefine, a class’s characteristics?\",\r\n    \"option1\":\"Abstraction\",\r\n    \"option2\":\"Polymorphism\",\r\n    \"option3\":\"Inheritance\",\r\n    \"option4\":\"Differential\",\r\n    \"answer\":2\r\n}"
+				},
+				"url": "http://127.0.0.1:8000/api/questions-update/8"
+			},
+			"response": []
+		}
+	]
+}

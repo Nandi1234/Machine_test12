@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/questions','API\QuestionController@index');
-Route::post('/questions-save/{exam}','API\QuestionController@saveExam');
+Route::post('/exam-save/{exam}','API\QuestionController@saveExam');
+Route::post('/questions-save','API\QuestionController@questionStore');
+Route::put('/questions-update/{id}','API\QuestionController@updateQuestion');
+Route::get('/all-questions','API\QuestionController@allQuestions');
